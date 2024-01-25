@@ -49,7 +49,7 @@ startRoom: Room 'Void' "This is a featureless void.";
 +me: Person;
 
 foo: object
-	foozle(args?) {
+	foozle([args]) {
 		"\nFoozle:  <<toString(args)>>\n ";
 	}
 ;
@@ -59,6 +59,9 @@ DefineSystemAction(Foozle)
 		local fn;
 
 		fn = bind(&foozle, foo, 'foo', 'bar');
+		fn();
+
+		fn = bind(&foozle, foo);
 		fn();
 	}
 ;
