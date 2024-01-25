@@ -47,3 +47,19 @@ gameMain: GameMainDef
 
 startRoom: Room 'Void' "This is a featureless void.";
 +me: Person;
+
+foo: object
+	foozle(args?) {
+		"\nFoozle:  <<toString(args)>>\n ";
+	}
+;
+
+DefineSystemAction(Foozle)
+	execSystemAction() {
+		local fn;
+
+		fn = bind(&foozle, foo, 'foo', 'bar');
+		fn();
+	}
+;
+VerbRule(Foozle) 'foozle': FoozleAction VerbPhrase = 'foozle/foozling';
