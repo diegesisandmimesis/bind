@@ -43,7 +43,7 @@ class Bind: object
 		ctx = obj;
 		args = argList;
 	}
-	execute() { (ctx).(fn)(args); }
+	execute([a2]) { (ctx).(fn)((args + a2)...); }
 ;
 
 bind(cb, obj, [args]) {
@@ -51,5 +51,5 @@ bind(cb, obj, [args]) {
 		return(nil);
 	if((cb == nil) || (dataTypeXlat(cb) != TypeProp))
 		return(nil);
-	return(function() { (new Bind(cb, obj, args...)).execute(); });
+	return(function([a2]) { (new Bind(cb, obj, args...)).execute(a2...); });
 }
