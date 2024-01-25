@@ -43,6 +43,12 @@ gameMain: GameMainDef
 	initialPlayerChar = me
 	inlineCommand(cmd) { "<b>&gt;<<toString(cmd).toUpper()>></b>"; }
 	printCommand(cmd) { "<.p>\n\t<<inlineCommand(cmd)>><.p> "; }
+
+	showIntro() {
+		"This demo provides a <<inlineCommand('foozle')>> command
+		that will call bound methods in a few different ways.
+		<.p> ";
+	}
 ;
 
 startRoom: Room 'Void' "This is a featureless void.";
