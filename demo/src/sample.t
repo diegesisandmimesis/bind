@@ -50,7 +50,8 @@ startRoom: Room 'Void' "This is a featureless void.";
 
 foo: object
 	foozle(arg0, arg1) {
-		"\nFoozle:  arg0 = <<toString(arg0)>>, arg1 = <<toString(arg1)>>\n ";
+		"\ncalled foozle(\'<<toString(arg0)>>\',
+			\'<<toString(arg1)>>\')\n ";
 	}
 ;
 
@@ -58,11 +59,14 @@ DefineSystemAction(Foozle)
 	execSystemAction() {
 		local fn;
 
-		fn = bind(&foozle, foo, 'foo', 'bar');
+		fn = bind(&foozle, foo, 'foo0', 'bar0');
 		fn();
 
 		fn = bind(&foozle, foo);
-		fn('foo1', 'foo2');
+		fn('foo1', 'bar1');
+
+		fn = bind(&foozle, foo, 'foo2');
+		fn('bar2');
 	}
 ;
 VerbRule(Foozle) 'foozle': FoozleAction VerbPhrase = 'foozle/foozling';
