@@ -22,6 +22,19 @@
 //		local fn = bind(&foozle, foo, 'bar');
 //		fn();
 //
+//	Mix bound and unbound arguments:
+//
+//		// fn() will be foo.foozle('foo', 'bar')
+//		local fn = bind(&foozle, foo, 'foo');
+//		fn('bar');
+//
+//
+// NOTE
+//
+//	The bind() mechanism doesn't verify that the number of bound and
+//	unbound arguments is the correct number for the bound method.  It's
+//	up to the implementor to keep track.
+//
 //
 #include <adv3.h>
 #include <en_us.h>
