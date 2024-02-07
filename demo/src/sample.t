@@ -59,20 +59,48 @@ foo: object
 		"\ncalled foozle(\'<<toString(arg0)>>\',
 			\'<<toString(arg1)>>\')\n ";
 	}
+	baz(arg?) {
+		"\ncalled baz(<<toString(arg)>>)\n ";
+	}
+;
+
+class Bar: object
+	cb = nil
+	construct(fn?) {
+		if(dataTypeXlat(fn) != TypeNil)
+			setMethod(&cb, fn);
+	}
+	callback([args]) {
+		if(propType(&cb) == TypeNil) return;
+		(cb)(args...);
+	}
 ;
 
 DefineSystemAction(Foozle)
+	prop = nil
+
 	execSystemAction() {
 		local fn;
 
+		// All arguments bound.
 		fn = bind(&foozle, foo, 'foo0', 'bar0');
 		fn();
 
+		// No arguments bound.
 		fn = bind(&foozle, foo);
 		fn('foo1', 'bar1');
 
+		// Mix of bound and unbound args.
 		fn = bind(&foozle, foo, 'foo2');
 		fn('bar2');
+
+		fn = bind(&baz, foo);
+		fn(nil);
+		fn(true);
+		fn();
+
+		obj = new Bar(fn);
+		obj.callback(true);
 	}
 ;
 VerbRule(Foozle) 'foozle': FoozleAction VerbPhrase = 'foozle/foozling';
