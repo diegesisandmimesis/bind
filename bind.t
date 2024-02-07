@@ -43,7 +43,7 @@
 bindModuleID: ModuleID {
         name = 'Bind Library'
         byline = 'Diegesis & Mimesis'
-        version = '1.0'
+        version = '1.01'
         listingOrder = 99
 }
 
